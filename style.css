@@ -2,7 +2,7 @@ body{
   margin:0;
 }
 a {
-  color:black;
+  color:red;
   text-decoration: none;
 }
 h1{
@@ -14,7 +14,7 @@ h1{
   padding: 20px;
 }
 #active{
-  color:blue;
+  color:black;
 }
 
 
