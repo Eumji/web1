@@ -18,6 +18,16 @@
 
   <body>
     <h1><a href="index.html">WEB</a></h1>
+    <input id="night_day" type="button" value="night" onclick="
+    if(document.querySelector('#night_day').value === 'night'){
+      document.querySelector('body').style.backgroundColor = 'black';
+      document.querySelector('body').style.color = 'white';
+      document.querySelector('#night_day').value = 'day';}
+    else{
+      document.querySelector('body').style.backgroundColor = 'white';
+      document.querySelector('body').style.color = 'black';
+      document.querySelector('#night_day').value = 'night';
+    }">
     <div id="grid">
       <ol>
         <li><a href="1.html">지혜</a></li>
@@ -27,7 +37,7 @@
       <div id="article">
         <p><h2>현성지혜</h2>
         지혜와 현성이는 <strong>2016년 5월 13일</strong>에 사귀기 시작했다.
-        <br>현재 지혜와 현성이는 <u>2년</u> 넘게 사귀는 중이다.</p>
+        </p>
 
         <img src="hsjh.jpg" width="200">
         <br><a href="https://opentutorials.org/course/3084/18418" target="_blank" title="코딩사이트">실습중~.~</a>
