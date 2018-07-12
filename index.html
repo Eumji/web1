@@ -3,6 +3,8 @@
   <head>
     <title>jihye</title>
     <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="colors.js"></script>
     <link rel="stylesheet" href="style.css">
         <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121860924-1"></script>
@@ -17,32 +19,52 @@
   </head>
 
   <body>
-    <h1><a href="index.html">WEB</a></h1>
-    <input id="night_day" type="button" value="night" onclick="
-    if(document.querySelector('#night_day').value === 'night'){
-      document.querySelector('body').style.backgroundColor = 'black';
-      document.querySelector('body').style.color = 'white';
-      document.querySelector('#night_day').value = 'day';}
-    else{
-      document.querySelector('body').style.backgroundColor = 'white';
-      document.querySelector('body').style.color = 'black';
-      document.querySelector('#night_day').value = 'night';
-    }">
-    <div id="grid">
-    <ol>
-      <li><a href="1.html">지혜</a></li>
-      <li><a href="2.html">현성</a></li>
-      <li><a href="3.html">현성지혜</a></li>
-    </ol>
+    <h1><a href="#welcome">WEB</a></h1>
 
-    <div id="article">
-      <p><h2>WEB</h2>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/MvqB6JsRbsc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    <br>웹스터디중!</p>
-    <img src="title.jpg" width="200">
-    <br><a href="https://opentutorials.org/course/3084/18418" target="_blank" title="코딩사이트">실습중~.~</a>
+    <div id="grid">
+      <ol id="nav"></ol>
+      <article>
+      </article>
+      <script>
+      function fetchPage(name){
+        fetch(name).then(function(response){
+          response.text().then(function(text){
+            document.querySelector('article').innerHTML = text;
+          })
+        });
+      }
+      if(location.hash){
+        fetchPage(location.hash.substr(2));/*해쉬를 통해 위치 알려주기?*/
+      }else{
+        fetchPage('welcome');
+      }
+      fetch('list').then(function(response){/*list를 list파일에 넣어놓고 불러오기*/
+        response.text().then(function(text){
+          var items = text.split(',');
+          var tags = '';
+          var i=0;
+          while(i<items.length){
+            var item=items[i];
+            item = item.trim();
+            console.log(item);
+            var tag = '<li><a href="#!'+item+'" onclick="fetchPage(\''+item+'\')">'+item+'</a></li>'/*list파일에서 가져온 값의 형식 맞춰줌*/
+            tags=tags+tag;
+            i=i+1;
+          }
+          document.querySelector('#nav').innerHTML = tags;
+        })
+      });
+      </script>
+
+      <div id="article">
+        <p><h2>WEB</h2>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/MvqB6JsRbsc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <br>웹스터디중!</p>
+      <img src="title.jpg" width="200">
+      <br><a href="https://opentutorials.org/course/3084/18418" target="_blank" title="코딩사이트">실습중~.~</a>
+      </div>
     </div>
-    </div>
+    <input type="button" value="night" onclick="nightDayHandler(this)">
 
     <p>
     <div id="disqus_thread"></div>
